@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>This form contains a set of Angular validations</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.css">        
+        <style type="text/css">            
+            .form{
+                border:1px solid #DDD;
+                padding:10px;
+                border-radius:4px;
+            }
+        </style>
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.js"></script>      
+    </head>
+    <body ng-app="">
+        <div class="container">
+            
+            <h1>Form validation recipes</h1>
+            
+            <form name="testForm" novalidate class="form">
+                <h6>Standard required field</h6>
+                <div class="form-group">
+                    <label for="FirstName">First name</label>
+                    <input type="text" ng-model="user.FirstName" required="" name="FirstName" class="form-control">
+                    <span class="help-block" ng-show="testForm.FirstName.$dirty && testForm.FirstName.$error.required">Name is required</span>
+                </div>
+
+                <h6>Required validation with pattern</h6>
+                <div class="form-group">
+                    <label for="AddressPostCode">Post code</label>
+                    <input type="text" ng-model="user.Address.PostCode" required name="AddressPostCode" class="form-control"
+                        ng-pattern="/[A-Za-z]{1,2}[0-9][A-Za-z0-9]?\s?[0-9][ABD-HJLNP-UW-Zabd-hjlnp-uw-z]{2}/">
+                    <span class="help-block" ng-show="testForm.AddressPostCode.$dirty && testForm.AddressPostCode.$error.required">Post code is required</span>
+                    <span class="help-block" ng-show="testForm.AddressPostCode.$dirty && testForm.AddressPostCode.$error.pattern">Post code is not valid</span>
+                <div class="form-group">
+                
+                </p>
+                <p>Form valid: <span ng-class="['label', {'label-success': testForm.$valid}, {'label-warning': !testForm.$valid}]">{{testForm.$valid}}</span></p>
+                <p>Form dirty: <span ng-class="['label', {'label-warning': testForm.$dirty}, {'label-success': !testForm.$dirty}]">{{testForm.$dirty}}</span></p>
+            </form>
+        
+        </div>
+        
+        <pre>user = {{user | json}}</pre>        
+        
+    </body>
+</html>
