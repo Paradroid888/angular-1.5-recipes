@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <title>Todo list</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.css">
+        <style type="text/css">
+            .form, .form-inline{
+                border:1px solid #DDD;
+                padding:10px;
+                border-radius:4px;
+            }
+            
+            .indexCol{width:10%;}
+            .taskCol{width:70%;}
+            .actionCol{width:20%;}
+        </style>        
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.js"></script>          
+        <script src="app/todo2.js"></script>
+    </head>
+    
+    <body ng-app="todoApp" ng-controller="todoController as vm">
+        <div class="container">
+
+            <div class="jumbotron">
+                <h1>Todo list</h1>
+                <p>A simple example that has defines a controller in a module in a standalone JS file. This variant uses 'Controller as'</p>
+            </div>            
+
+            <form class="form-inline">
+                <div class="formgroup"></div>
+                <label for="newString">New task</label>
+                <input class="form-control" type="text" ng-model="vm.newString">
+                <button class="btn btn-primary" ng-click="vm.add()">Add new</button>        
+            </form>
+                        
+            <h3>Open tasks</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="indexCol">#</th>
+                        <th class="taskCol">Task</th>
+                        <th class="actionCol"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="todoItem in vm.todoItems">
+                        <td><input type="checkbox" name="item{{$index}}" ng-click="vm.completeItem($index)"></td>
+                        <td>{{todoItem}}</td>
+                        <td><button class="btn btn-warning btn-xs" ng-click="vm.deleteTask($index)">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Completed items</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="indexCol">#</th>
+                        <th class="taskCol">Task</th>
+                        <th class="actionCol"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="todoItem in vm.completedItems">
+                        <td>{{$index + 1}}</td>
+                        <td>{{todoItem}}</td>
+                        <td><button class="btn btn-xs btn-success" ng-click="vm.undoComplete($index)">Undo</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
